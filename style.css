@@ -1,0 +1,48 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+.errors {
+    margin: 5px 0px 20px 0px;
+}
+.errors span {
+    color: red;
+    margin: 5px 0px 20px 0px;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section {
+    width: 50%;
+    height: auto;
+}
+form {
+    width: 100%;
+}
+form .form-control {
+    width: 100%;
+}
+form .form-control label {
+    width: 100%;
+    font-size: 16px;
+    display: block;
+}
+form .form-control input {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 5px 0px 0px 0px;
+}
+form button {
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+
+}
