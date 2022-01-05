@@ -22,14 +22,13 @@ if(!isset($_SESSION["userid"])) {
         <form action="action.php" method="POST">
             <div class="form-control">
                 <label for="userPass">Password</label>
-                <input type="password" id="userPass" class="userPass" name="userPass" required>
+                <input type="password" id="userPass" class="userPass" name="userPass">
                 <div id="userPass-error" class="errors"></div>
             </div>
             <div class="form-control">
                 <label for="userConfirmPass">Confirm Password</label>
-                <input type="password" id="userConfirmPass" class="userConfirmPass" name="userConfirmPass" required>
+                <input type="password" id="userConfirmPass" class="userConfirmPass" name="userConfirmPass">
                 <div id="userConfirmPass-error" class="errors"></div>
-                <div id="match-error" class="errors"></div>
             </div>
             <div class="form-control">
                 <button type="submit" id="submit" name="changePasswordSubmit">Change Password</button>
@@ -45,42 +44,33 @@ if(!isset($_SESSION["userid"])) {
         let passError = document.getElementById("userPass-error");
         let confirmPass = document.getElementById("userConfirmPass");
         let confirmPassError = document.getElementById("userConfirmPass-error");
-        let passMatch = document.getElementById("match-error");
 
         let errorCount = 0;
         form.addEventListener("submit", function(e) {
             
-            if(pass.value.trim() == "" || pass.value.length == 0) {
+            if(pass.value.trim() == "") {
                 passError.innerHTML = "<span>Password is empty</span>";
                 errorCount = 1;
-            }
-            else {
-                if(pass.value.length <= 6) {
-                    passError.innerHTML = "<span>Password Value must be greater than 6</span>";
-                    errorCount = 1;
-                }
-                else {
-                    passError.innerHTML = "";
-                    errorCount = 0;
-                }
+            } else if(pass.value.length < 6) {
+                passError.innerHTML = "<span>Password Value must be greater than 6</span>";
+                errorCount = 1;
+            } else {
+                passError.innerHTML = "";
+                errorCount = 0;
             }
 
-            if(confirmPass.value.trim() == "" || confirmPass.value.length == 0) {
+            if(confirmPass.value.trim() == "") {
                 confirmPassError.innerHTML = "<span>Confirm Password is empty</span>";
                 errorCount = 1;
-            }
-            else {
-                if(confirmPass.value.length <= 6) {
-                    confirmPassError.innerHTML = "<span>Confirm Password Value must be greater than 6</span>";
-                    errorCount = 1;
-                }
-                else {
-                    confirmPassError.innerHTML = "";
-                    errorCount = 0;
-                }
+            } else if(pass.value != confirmPass.value) {
+                confirmPassError.innerHTML = "<span>Passwords Not Matching</span>";
+                errorCount = 1;
+            } else {
+                confirmPassError.innerHTML = "";
+                errorCount = 0;
             }
 
-            if(errorCount == 1) {
+            if(errorCount != 0) {
                 e.preventDefault();
             }
         })

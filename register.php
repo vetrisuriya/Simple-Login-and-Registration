@@ -38,7 +38,6 @@ if(isset($_SESSION["userid"])) {
                 <label for="userConfirmPass">Confirm Password</label>
                 <input type="password" id="userConfirmPass" class="userConfirmPass" name="userConfirmPass">
                 <div id="userConfirmPass-error" class="errors"></div>
-                <div id="match-error" class="errors"></div>
             </div>
             <div class="form-control">
                 <button type="submit" id="submit" name="regSubmit">Sign Up</button>
@@ -51,6 +50,11 @@ if(isset($_SESSION["userid"])) {
 
 
     <script>
+        function validateEmail(emailVal){      
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailPattern.test(emailVal); 
+        }
+
         let form = document.querySelector("form");
         let name = document.getElementById("userName");
         let nameError = document.getElementById("userName-error");
@@ -60,71 +64,58 @@ if(isset($_SESSION["userid"])) {
         let passError = document.getElementById("userPass-error");
         let confirmPass = document.getElementById("userConfirmPass");
         let confirmPassError = document.getElementById("userConfirmPass-error");
-        let passMatch = document.getElementById("match-error");
 
         let errorCount = 0;
         form.addEventListener("submit", function(e) {
             
-            if(name.value.trim() == "" || name.value.length == 0) {
+            if(name.value.trim() == "") {
                 nameError.innerHTML = "<span>Name is empty</span>";
                 errorCount = 1;
-            }
-            else {
+            } else if(name.value.length < 3) {
+                nameError.innerHTML = "<span>Name Value must be greater than 3</span>";
+                errorCount = 1;
+            } else {
                 nameError.innerHTML = "";
                 errorCount = 0;
             }
-
-            if(email.value.trim() == "" || email.value.length == 0) {
+            
+            if(email.value.trim() == "") {
                 emailError.innerHTML = "<span>Email is empty</span>";
                 errorCount = 1;
-            }
-            else {
+            } else if(!validateEmail(email.value)) {
+                emailError.innerHTML = "<span>Email is Invalid</span>";
+                errorCount = 1;
+            } else {
                 emailError.innerHTML = "";
                 errorCount = 0;
             }
 
-            if(pass.value.trim() == "" || pass.value.length == 0) {
+            if(pass.value.trim() == "") {
                 passError.innerHTML = "<span>Password is empty</span>";
                 errorCount = 1;
-            }
-            else {
-                if(pass.value.length <= 6) {
-                    passError.innerHTML = "<span>Password Value must be greater than 6</span>";
-                    errorCount = 1;
-                }
-                else {
-                    passError.innerHTML = "";
-                    errorCount = 0;
-                }
+            } else if(pass.value.length < 6) {
+                passError.innerHTML = "<span>Password Value must be greater than 6</span>";
+                errorCount = 1;
+            } else {
+                passError.innerHTML = "";
+                errorCount = 0;
             }
 
-            if(confirmPass.value.trim() == "" || confirmPass.value.length == 0) {
+            if(confirmPass.value.trim() == "") {
                 confirmPassError.innerHTML = "<span>Confirm Password is empty</span>";
                 errorCount = 1;
-            }
-            else {
-                if(confirmPass.value.length <= 6) {
-                    confirmPassError.innerHTML = "<span>Confirm Password Value must be greater than 6</span>";
-                    errorCount = 1;
-                }
-                else {
-                    confirmPassError.innerHTML = "";
-                    errorCount = 0;
-                }
+            } else if(pass.value != confirmPass.value) {
+                confirmPassError.innerHTML = "<span>Passwords Not Matching</span>";
+                errorCount = 1;
+            } else {
+                confirmPassError.innerHTML = "";
+                errorCount = 0;
             }
 
-            // if(pass.value != confirmPass.value) {
-            //     passMatch.innerHTML = "<span>Password Must Match</span>";
-            //     errorCount = 1;
-            // }
-            // else {
-            //     passMatch.innerHTML = "";
-            //     errorCount = 0;
-            // }
-
-            if(errorCount == 1) {
+            if(errorCount != 0) {
                 e.preventDefault();
             }
+            
         })
     </script>
 </body>
