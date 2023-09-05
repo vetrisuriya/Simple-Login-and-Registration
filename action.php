@@ -35,10 +35,14 @@ if(isset($_POST["loginSubmit"])) {
     $count = $query->rowCount();
     $fetch = $query->fetch();
 
+    var_dump($count);
+
     if($count != 0) {
         session_start();
         $_SESSION["userid"] = $fetch["user_id"];
         header("location: ./index.php");
+    } else {
+        header("location: ./login.php");
     }
 }
 
