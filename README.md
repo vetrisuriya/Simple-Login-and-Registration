@@ -27,7 +27,7 @@
 
 ## Contact
 
-- Website [vetri-suriya](https://vetri-suriya.web.app/)
-- GitHub [vetrisuriya](https://github.com/vetrisuriya)
-- Codepen [vetrisuriya](https://codepen.io/vetrisuriya)
-- Linkedin [vetri-suriya](https://www.linkedin.com/in/vetri-suriya/)
+- [Website](https://www.vetrisuriya.in/)
+- [GitHub](https://github.com/vetrisuriya)
+- [Codepen](https://codepen.io/vetrisuriya)
+- [Linkedin](https://www.linkedin.com/in/vetrisuriya/)
